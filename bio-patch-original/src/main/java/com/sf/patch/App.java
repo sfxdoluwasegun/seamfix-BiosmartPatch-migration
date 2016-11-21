@@ -30,7 +30,7 @@ public class App {
     public static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
 
     public static void main(String[] args) {
-//        startLogger();
+        startLogger();
         initPatchProperties();
 
         log("Applying Update: " + new Date());
@@ -42,6 +42,7 @@ public class App {
             startUpdating();
             log("Done applying update");
             if (updateApplied) {
+                MapDBUtils.updateMapDb();
                 System.out.println("UPDATE HAS BEEN APPLIED");
                 deleteUpdateFile();
                 updateConfig();

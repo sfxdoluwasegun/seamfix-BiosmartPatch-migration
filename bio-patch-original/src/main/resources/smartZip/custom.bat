@@ -3,49 +3,92 @@ call :redirect >log.txt 2>&1
 
 :redirect
 echo %date% %time%
+rem switch to kyc folder, contains all dependencies
 cd kyc
 
-set newhome=c:\smartclient-2.0\smartclient
+set currentHome=c:\smartclient-2.0\smartclient
 
-del /q /f %newhome%\kycclient.exe
-xcopy /y kycclient.exe %newhome%
+del /q /f %currentHome%\kycclient.exe
+xcopy /y kycclient.exe %currentHome%
 
-set newlib=%newhome%\lib
-mkdir %newlib%
+set currentLib=%currentHome%\lib
+mkdir %currentLib%
 
-del /q /f %newlib%\aware-wsq1000-2.1.0.5.jar
-del /q /f %newlib%\jai-core-1.1.3-alpha.jar
-del /q /f %newlib%\jnativehook-2.0.2.jar
-del /q /f %newlib%\gson-1.6.jar
-del /q /f %newlib%\JTattoo-1.6.11.jar
-del /q /f %newlib%\rest-handler*.jar
-del /q /f %newlib%\validationengine*.jar
-del /q /f %newlib%\validation-engine*.jar
-del /q /f %newlib%\webcam-capture*.jar
-del /q /f %newlib%\seamfixfingerprintapi2*.jar
+del /q /f %currentLib%\apache-commons-net.jar
+del /q /f %currentLib%\asm-1.5.3.jar.jar
+del /q /f %currentLib%\biocapture-common-1.0-SNAPSHOT.jar
+del /q /f %currentLib%\biocapture-core-1.0-SNAPSHOT.jar
+del /q /f %currentLib%\bridj-0.6.2.jar
+del /q /f %currentLib%\c3p0-0.9.1.2.jar
+del /q /f %currentLib%\cglib-2.1_3.jar
+del /q /f %currentLib%\com.ibm.icu_3.4.4.1.jar
+del /q /f %currentLib%\comm.jar
+del /q /f %currentLib%\commons-logging-1.1.1.jar
+del /q /f %currentLib%\commons-validator.jar
+del /q /f %currentLib%\converter-gson-2.0.0-beta4.jar
+del /q /f %currentLib%\dpuareu.jar
+del /q /f %currentLib%\ehcache-1.2.3.jar
+del /q /f %currentLib%\grfingerjava.jar
+del /q /f %currentLib%\GriauleAfisWSQJava.jar
+del /q /f %currentLib%\gson-2.4.jar
+del /q /f %currentLib%\hibernate-3.2.6.ga.jar
+del /q /f %currentLib%\hibernate3.jar
+del /q /f %currentLib%\httpclient-4.1.jar
+del /q /f %currentLib%\httpclient-cache-4.1.jar
+del /q /f %currentLib%\httpcore-4.1.jar
+del /q /f %currentLib%\httpmime-4.1.jar
+del /q /f %currentLib%\imgscalr-lib-4.2.jar
+del /q /f %currentLib%\jai_codec.jar
+del /q /f %currentLib%\jai_core.jar
+del /q /f %currentLib%\jakarta-oro-2.0.8.jar
+del /q /f %currentLib%\javaee.jar
+del /q /f %currentLib%\JFindMe.jar
+del /q /f %currentLib%\jgoodies-validation-2.3.2.jar
+del /q /f %currentLib%\JJILCore.jar
+del /q /f %currentLib%\JJIL-J2SE.jar
+del /q /f %currentLib%\jnativehook-2.0.3.jar
+del /q /f %currentLib%\JTattoo.jar
+del /q /f %currentLib%\jxl.jar
+del /q /f %currentLib%\log4j.jar
+del /q /f %currentLib%\lombok.jar
+del /q /f %currentLib%\lti-civil.jar
+del /q /f %currentLib%\lti-civil-noutils.jar
+del /q /f %currentLib%\miglayout-4.0.jar
+del /q /f %currentLib%\miglayout15-swing.jar
+del /q /f %currentLib%\miglayout-src.zip
+del /q /f %currentLib%\neurotec-biometrics-tools.jar
+del /q /f %currentLib%\okhttp-3.1.2.jar
+del /q /f %currentLib%\okio-1.6.0.jar
+del /q /f %currentLib%\OpenNMEA.jar
+del /q /f %currentLib%\postgresql.jar
+del /q /f %currentLib%\rest-handler-1.4.8.jar
+del /q /f %currentLib%\retrofit-2.0.0-beta4.jar
+del /q /f %currentLib%\sc-griaule.jar
+del /q /f %currentLib%\sc-neurotec.jar
+del /q /f %currentLib%\SeamfixFingerprintApi2.jar
+del /q /f %currentLib%\SeamfixSmsLib.jar
+del /q /f %currentLib%\sigar.jar
+del /q /f %currentLib%\slf4j-api-1.7.4.jar
+del /q /f %currentLib%\sun-jai_codec.jar
+del /q /f %currentLib%\swt.jar
+del /q /f %currentLib%\validation-engine-3.2.18.jar
+del /q /f %currentLib%\webcam-capture-0.3.12-20160507.091613-2.jar
 
-xcopy /y c:\smartclient-2.0\biosmart\lib\aware-*.jar %newlib%
-xcopy /y c:\smartclient-2.0\biosmart\lib\dpuareu.jar %newlib%
-xcopy /y c:\smartclient-2.0\biosmart\lib\slf4j-api-1.7.4.jar %newlib%
-xcopy /y c:\smartclient-2.0\biosmart\lib\swingx-all-1.6.4.jar %newlib%
+xcopy /y lib\*.jar %currentLib%
 
-xcopy /y lib\*.jar %newlib%
+set currentNative=%currentHome%\native
+mkdir %currentNative%
 
-set newnative=%newhome%\native
-mkdir %newnative%
-
-rem copy native
-xcopy /y c:\smartclient-2.0\biosmart\native\*.* %newnative%
-
-rem check if folder exists in path before adding 
-for /F "tokens=*" %%f in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path ^| find /c /i "c:\smartclient-2.0\smartclient\native"') do (set found=%%f) 
+rem check if native folder exists in path before adding
+for /F "tokens=*" %%f in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path ^| find /c /i "c:\smartclient-2.0\smartclient\native"') do (set found=%%f)
 
 for /F "tokens=2* delims= " %%f IN ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path ^| findstr /i path') do (set OLD_SYSTEM_PATH=%%g)
 
 
 if %found%==0 (
+    rem commit path
 	echo NOT FOUND!
-	setx PATH "%newnative%;%OLD_SYSTEM_PATH%;" -m
+	setx PATH "%currentNative%;%OLD_SYSTEM_PATH%;" -m
 )
 
 rem copy dat files
@@ -57,19 +100,10 @@ if not exist "%mypublic%\mtnCore.dat" (
 )
 xcopy /y dat\nt* %mypublic%
 
-rem copy props
-set newprops=%newhome%\props\.kyc
-mkdir %newprops%
-xcopy /y /s /O/X/E/H/K/I props\* %newprops%
-
-rem delete biosmart folder
-rmdir /Q /S c:\smartclient-2.0\biosmart
-
-rem delete old smartclient jar
-del /q /f %newhome%\smartclient.jar
+del /q /f %currentHome%\props\.kyc
 
 rem delete biocapture xml
-del /q /f %newhome%\biocaptureconfig.xml
+del /q /f %currentHome%\biocaptureconfig.xml
 
 rem change password and populate area
 set version=9.2
