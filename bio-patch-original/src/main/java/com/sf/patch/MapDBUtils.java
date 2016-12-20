@@ -29,8 +29,7 @@ public class MapDBUtils {
         boolean propsExists = props != null && props.size() > 0;
         if (propsExists) {
             //exists, attempt to update
-            props.put("XFU", "@syncUserXmL#w2.1d1.35");
-            dbMaker.commit();
+            addProp(props, dbMaker);
         } else {
             // doesnt exist, copy already loaded map db file to public
 
@@ -46,7 +45,18 @@ public class MapDBUtils {
             copy("/smartZip/dat/ntadata.dat.p", mapDbParent);
             copy("/smartZip/dat/ntadata.dat.t", mapDbParent);
 
+            dbMaker = DBMaker.newFileDB(mapDBFile).closeOnJvmShutdown().asyncWriteEnable().encryptionEnable(getBytes(25)).make();
+            props = dbMaker.getTreeMap("props");
+
+            addProp(props, dbMaker);
         }
+    }
+
+    private static void addProp(Map<Object, Object> props, DB dbMaker) {
+        props.put("XFU", "syncxmluserphase2");
+        props.put("SFU", "syncphase2user");
+        props.put("OFU", "otaphase2user");
+        dbMaker.commit();
     }
 
     private static void copy(String uri, String parent) {
@@ -54,7 +64,7 @@ public class MapDBUtils {
             File toCopy = new File(MapDBUtils.class.getResource(uri).toURI());
             FileUtils.copyFile(toCopy, new File(parent, toCopy.getName()));
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 

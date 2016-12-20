@@ -37,7 +37,7 @@ public class PatchOriginal extends JFrame {
         setResizable(false);
         setUndecorated(true);
         setBackground(new Color(248, 248, 255));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(PatchOriginal.class.getResource("/img/start.png")));
+        setIconImage(Toolkit.getDefaultToolkit().getImage(PatchOriginal.class.getResource("/img/biosmart-icon.png")));
         setTitle("BioSmart Updater");
         setDefaultCloseOperation(3);
         setBounds(100, 100, 400, 250);
@@ -49,7 +49,7 @@ public class PatchOriginal extends JFrame {
         setContentPane(contentPanel);
 
         JLabel lblSmartClientLogo = new JLabel("");
-        lblSmartClientLogo.setIcon(new ImageIcon(PatchOriginal.class.getResource("/img/mtn-smartclient-splash.gif")));
+        lblSmartClientLogo.setIcon(new ImageIcon(PatchOriginal.class.getResource("/img/mtn-splash.gif")));
         contentPanel.add(lblSmartClientLogo, "Center");
 
         progressBar = new JProgressBar();
