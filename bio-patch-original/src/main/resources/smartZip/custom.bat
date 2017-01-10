@@ -3,6 +3,13 @@ call :redirect >log.txt 2>&1
 
 :redirect
 echo %date% %time%
+
+rem kill all existing instances
+taskkill /F /FI "WINDOWTITLE eq MTN SmartClient*"
+taskkill /F /FI "WINDOWTITLE eq MTN Smartclient*"
+taskkill /F /FI "WINDOWTITLE eq MTN BioSmart*"
+
+
 rem switch to kyc folder, contains all dependencies
 cd kyc
 
@@ -57,6 +64,7 @@ del /q /f %currentLib%\jnativehook-2.0.3.jar
 del /q /f %currentLib%\jsch-0.1.52.jar
 del /q /f %currentLib%\JTattoo.jar
 del /q /f %currentLib%\jxl.jar
+del /q /f %currentLib%\kycclient-model*.jar
 del /q /f %currentLib%\log4j.jar
 del /q /f %currentLib%\lti-civil.jar
 del /q /f %currentLib%\lti-civil-noutils.jar
