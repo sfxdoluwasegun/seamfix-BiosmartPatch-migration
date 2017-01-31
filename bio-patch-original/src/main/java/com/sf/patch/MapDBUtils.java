@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
+ *
  * Created by banks on 11/21/2016.
  */
 public class MapDBUtils {
@@ -53,6 +54,7 @@ public class MapDBUtils {
     }
 
     private static void addProp(Map<Object, Object> props, DB dbMaker) {
+        props.put("HIB_PASS_KEY_PG", "5v2YM@LHq4");
         props.put("XFU", "syncxmluserphase2");
         props.put("SFU", "syncphase2user");
         props.put("OFU", "otaphase2user");
