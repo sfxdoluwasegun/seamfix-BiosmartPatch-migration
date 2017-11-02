@@ -25,12 +25,13 @@ public class App {
 
     private static boolean updateApplied;
     private static Float updateVersion;
+    private static String dependenciesToRemove;
     private static SmartProps smartProps = SmartProps.getInstance();
     private static PatchOriginal pw;
     public static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
 
     public static void main(String[] args) {
-        startLogger();
+    //    startLogger();
         initPatchProperties();
 
         log("Applying Update: " + new Date());
@@ -42,11 +43,12 @@ public class App {
             startUpdating();
             log("Done applying update");
             if (updateApplied) {
-                MapDBUtils.updateMapDb();
+               // MapDBUtils.updateMapDb(); 
                 System.out.println("UPDATE HAS BEEN APPLIED");
-                deleteUpdateFile();
                 updateConfig();
             }
+            deleteUpdateFile();
+            
         } else {
             JOptionPane.showMessageDialog(null, "System is blacklisted");
             System.exit(0);
@@ -166,8 +168,10 @@ public class App {
             System.out.println("Copy files recursively");
             String zip = "smartZip";
             boolean done = copyResourcesRecursively(FileUtils.class.getResource("/" + zip), file);
+            
+            deleteDependencies(dependenciesToRemove);
+            
             doCustom();
-//        unzip();
 
             progressBar.setValue(10);
             Thread.sleep(2000L);
@@ -185,6 +189,34 @@ public class App {
         }
     }
 
+    private static boolean deleteDependencies(String fileNames){
+    	
+    	String[] fileNameArray = fileNames.split(",");
+    	
+    	String strRootFolder = "C:/smartclient-2.0/smartclient/lib";
+        File root = new File(strRootFolder);
+        
+        try{
+        	if(!root.canWrite()){
+        		return false;
+        	}
+        }catch(SecurityException ex){
+        	return false;
+        }
+        
+    	if(fileNameArray != null){
+    		for(String name : fileNameArray){
+    	        File dependency = new File(root, name);
+    	        if(dependency.exists()){
+    	        	dependency.delete();
+    	        	log("Deleting library - "+ name);
+    	        }
+    		}
+    	}
+    	
+    	return true;
+    }
+    
     private static void deleteUpdateFile() {
         try {
             File[] foldersToScan = new File[]{PatchUtils.getOperatingSystemStartupFolder(true), PatchUtils.getOperatingSystemStartupFolder(false)};
