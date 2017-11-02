@@ -31,7 +31,7 @@ public class App {
     public static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
 
     public static void main(String[] args) {
-    //    startLogger();
+        startLogger();
         initPatchProperties();
 
         log("Applying Update: " + new Date());
@@ -85,10 +85,13 @@ public class App {
             } catch (Exception e) {
                 e.printStackTrace(System.out);
             }
+            
             if (updateVersion == null) {
                 log("Update Version is null, revert to default");
-                updateVersion = Float.valueOf(patchProps.getProperty("version", "0.0"));
+                updateVersion = Float.valueOf(patchProps.getProperty("version", "2.4"));
             }
+            
+            dependenciesToRemove = patchProps.getProperty("removeOldDependencies", "");
         } catch (IOException | NumberFormatException ex) {
             log("Error reading properties file");
             ex.printStackTrace(System.out);
