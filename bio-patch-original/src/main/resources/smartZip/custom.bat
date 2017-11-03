@@ -1,4 +1,4 @@
-cd %temp%
+cd C:\Windows\Temp
 call :redirect >log.txt 2>&1
 
 :redirect
@@ -10,16 +10,27 @@ taskkill /F /FI "WINDOWTITLE eq MTN Smartclient*"
 taskkill /F /FI "WINDOWTITLE eq MTN BioSmart*"
 
 
-rem switch to kyc folder, contains all dependencies
-cd kyc
+rem switch to kyc smartzip folder, contains all dependencies
+cd kyc\smartZip
 
 set currentHome=c:\smartclient-2.0\smartclient
 
-del /q /f %currentHome%\kycclient.exe
-xcopy /y kycclient.exe %currentHome%
 
-set currentLib=%currentHome%\lib
-mkdir %currentLib%
+rename %currentLib%\aware-preface-6.1.1.jar Preface-6.1.1.jar
+rename %currentLib%\aware-wsq1000-2.1.0.6.jar Wsq1000-2.1.0.6.jar
+rename %currentLib%\aware-accusequence-3.9.9.jar Accusequence-3.9.9.jar
+rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
+rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
+rename %currentLib%\lombok.jar lombok-1.16.6.jar
+
+
+del /q /f %currentLib%\biocapture-common-1.0-SNAPSHOT.jar
+del /q /f %currentLib%\biocapture-core-1.0-SNAPSHOT.jar
+del /q /f %currentLib%\rest-handler-*.jar
+del /q /f %currentLib%\validation-engine-*.jar
+del /q /f %currentLib%\kycclient-model*.jar
+del /q /f %currentLib%\kyc-captureapi-*.jar
+del /q /f %currentLib%\demographics-validation-engine-*.jar
 
 
 xcopy /y lib\*.jar %currentLib%

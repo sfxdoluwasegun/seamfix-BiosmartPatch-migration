@@ -53,7 +53,7 @@
                             <manifest>launch.manifest</manifest>
                             <dontWrapJar>false</dontWrapJar>
                             <headerType>gui</headerType>
-                            <jar>${project.build.directory}\${project.build.finalName}.jar</jar>
+                            <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
                             <outfile>${patch.original.exe.name}</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>

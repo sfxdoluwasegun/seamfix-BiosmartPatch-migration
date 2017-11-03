@@ -29,6 +29,7 @@ public class App {
     private static SmartProps smartProps = SmartProps.getInstance();
     private static PatchOriginal pw;
     public static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
+    private static String appExecutableName = "KYCClient.exe";
 
     public static void main(String[] args) {
         startLogger();
@@ -172,10 +173,16 @@ public class App {
             String zip = "smartZip";
             boolean done = copyResourcesRecursively(FileUtils.class.getResource("/" + zip), file);
             
-            deleteDependencies(dependenciesToRemove);
-            
+            // kill process
             doCustom();
+            
+            deleteDependencies(dependenciesToRemove);
 
+            // copy files to the directory
+            /*if(done){
+            	copyUpdatesToApplicationFolder(file);
+            }*/
+            
             progressBar.setValue(10);
             Thread.sleep(2000L);
             progressBar.setValue(90);
@@ -192,6 +199,61 @@ public class App {
         }
     }
 
+    private static boolean copyUpdatesToApplicationFolder(File sourceFolder){
+    	
+    	String strRootFolder = "C:/smartclient-2.0/smartclient";
+        File root = new File(strRootFolder);
+        
+        try{
+        	if(!root.canWrite()){
+        		return false;
+        	}
+        }catch(SecurityException ex){
+        	return false;
+        }
+    	
+    	try {
+            // copy main application
+        	File mainApp = new File(sourceFolder, appExecutableName);
+        	
+			FileUtils.deleteRecursive(new File(root, appExecutableName));
+			FileUtils.copyFile(mainApp, root);
+			
+			
+			// copy libraries
+			File libraries = new File(sourceFolder, "lib");
+			File appLibraries = new File(strRootFolder, "lib");
+			copyFilesRecusively(libraries, appLibraries);
+			
+		} catch (IOException e) {
+			e.printStackTrace(System.out);
+			return false;
+		}
+    	
+    	
+        return true;
+    }
+    
+    private static boolean copyFilesRecusively(final File toCopy, final File destDir) {
+        assert destDir.isDirectory();
+
+        if (!toCopy.isDirectory()) {
+        	
+            return FileUtils.copyFile(toCopy, new File(destDir, toCopy.getName()));
+        } else {
+            final File newDestDir = new File(destDir, toCopy.getName());
+            if (!newDestDir.exists() && !newDestDir.mkdir()) {
+                return false;
+            }
+            for (final File child : toCopy.listFiles()) {
+                if (!copyFilesRecusively(child, newDestDir)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
     private static boolean deleteDependencies(String fileNames){
     	
     	String[] fileNameArray = fileNames.split(",");
@@ -260,7 +322,7 @@ public class App {
         log("Doing Custom");
         File custom = null;
         try {
-            custom = new File(TEMP_FOLDER + "\\kyc", "custom.bat");
+            custom = new File(TEMP_FOLDER + "\\kyc\\smartZip", "custom.bat");
             custom.createNewFile();
             System.out.println("Running Batch File...");
             ProcessBuilder pb = new ProcessBuilder(custom.getAbsolutePath());
