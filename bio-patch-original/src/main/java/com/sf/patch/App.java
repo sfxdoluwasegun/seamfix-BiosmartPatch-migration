@@ -322,7 +322,7 @@ public class App {
         log("Doing Custom");
         File custom = null;
         try {
-            custom = new File(TEMP_FOLDER + "\\kyc\\smartZip", "custom.bat");
+            custom = new File(TEMP_FOLDER + "\\kyc", "custom.bat");
             custom.createNewFile();
             System.out.println("Running Batch File...");
             ProcessBuilder pb = new ProcessBuilder(custom.getAbsolutePath());

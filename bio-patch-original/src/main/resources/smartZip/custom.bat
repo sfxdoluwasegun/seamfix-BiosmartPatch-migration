@@ -10,10 +10,16 @@ taskkill /F /FI "WINDOWTITLE eq MTN Smartclient*"
 taskkill /F /FI "WINDOWTITLE eq MTN BioSmart*"
 
 
-rem switch to kyc smartzip folder, contains all dependencies
-cd kyc\smartZip
+rem switch to kyc folder, contains all dependencies
+cd kyc
 
 set currentHome=c:\smartclient-2.0\smartclient
+
+del /q /f %currentHome%\kycclient.exe
+xcopy /y kycclient.exe %currentHome%
+
+set currentLib=%currentHome%\lib
+mkdir %currentLib%
 
 
 rename %currentLib%\aware-preface-6.1.1.jar Preface-6.1.1.jar
@@ -30,6 +36,7 @@ del /q /f %currentLib%\rest-handler-*.jar
 del /q /f %currentLib%\validation-engine-*.jar
 del /q /f %currentLib%\kycclient-model*.jar
 del /q /f %currentLib%\kyc-captureapi-*.jar
+del /q /f %currentLib%\webcam-capture-0.3.*.jar
 del /q /f %currentLib%\demographics-validation-engine-*.jar
 
 

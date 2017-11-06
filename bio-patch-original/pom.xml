@@ -54,7 +54,7 @@
                             <dontWrapJar>false</dontWrapJar>
                             <headerType>gui</headerType>
                             <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
-                            <outfile>${patch.original.exe.name}</outfile>
+           			        <outfile>${patch.original.exe.name}</outfile>
                             <downloadUrl>http://java.com/download</downloadUrl>
                             <classPath>
                                 <mainClass>com.sf.patch.App</mainClass>
@@ -62,7 +62,8 @@
                             <jre>
                                 <jdkPreference>preferJre</jdkPreference>
                                 <runtimeBits>64/32</runtimeBits>
-                                <minVersion>1.0.0</minVersion>
+                                <minVersion>1.7.0</minVersion>
+                                <maxVersion>1.7.0_80</maxVersion>
                             </jre>
                         </configuration>
                     </execution>
