@@ -33,15 +33,23 @@ rename %currentLib%\lombok.jar lombok-1.16.6.jar
 del /q /f %currentLib%\biocapture-common-1.0-SNAPSHOT.jar
 del /q /f %currentLib%\biocapture-core-1.0-SNAPSHOT.jar
 del /q /f %currentLib%\rest-handler-*.jar
+del /q /f %currentLib%\commons-lang*.jar
 del /q /f %currentLib%\validation-engine-*.jar
 del /q /f %currentLib%\kycclient-model*.jar
 del /q /f %currentLib%\kyc-captureapi-*.jar
 del /q /f %currentLib%\webcam-capture-0.3.*.jar
 del /q /f %currentLib%\demographics-validation-engine-*.jar
-
+del /q /f %currentLib%\validation-engine-*.jar
+del /q /f %currentLib%\x86-3.3*.jar
 
 xcopy /y lib\*.jar %currentLib%
+xcopy /y lib\*.dll %currentLib%
 
+
+del /q /f %currentHome%\props\.kyc
+
+rem delete biocapture xml
+del /q /f %currentHome%\biocaptureconfig.xml
 
 set currentNative=%currentHome%\native
 mkdir %currentNative%
@@ -57,11 +65,5 @@ if %found%==0 (
 	echo NOT FOUND!
 	setx PATH "%currentNative%;%OLD_SYSTEM_PATH%;" -m
 )
-
-
-del /q /f %currentHome%\props\.kyc
-
-rem delete biocapture xml
-del /q /f %currentHome%\biocaptureconfig.xml
 
 exit
