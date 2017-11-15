@@ -28,12 +28,14 @@ public class App {
     private static String dependenciesToRemove;
     private static SmartProps smartProps = SmartProps.getInstance();
     private static PatchOriginal pw;
-    public static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
+    public static String TEMP_FOLDER = "C:\\Windows\\Temp";
     private static String appExecutableName = "KYCClient.exe";
 
     public static void main(String[] args) {
         startLogger();
         initPatchProperties();
+        
+        log("Using TEMP FOLDER - " + TEMP_FOLDER);
 
         log("Applying Update: " + new Date());
         pw = new PatchOriginal();
@@ -47,9 +49,8 @@ public class App {
                // MapDBUtils.updateMapDb(); 
                 System.out.println("UPDATE HAS BEEN APPLIED");
                 updateConfig();
+                deleteUpdateFile();
             }
-            deleteUpdateFile();
-            
         } else {
             JOptionPane.showMessageDialog(null, "System is blacklisted");
             System.exit(0);
@@ -176,7 +177,7 @@ public class App {
             // kill process
             doCustom();
             
-            deleteDependencies(dependenciesToRemove);
+            deleteDependencies(dependenciesToRemove); // older updates
 
             // copy files to the directory
             /*if(done){
@@ -209,6 +210,7 @@ public class App {
         		return false;
         	}
         }catch(SecurityException ex){
+        	ex.printStackTrace(System.out);
         	return false;
         }
     	

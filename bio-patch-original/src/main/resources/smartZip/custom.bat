@@ -15,9 +15,6 @@ cd kyc
 
 set currentHome=c:\smartclient-2.0\smartclient
 
-del /q /f %currentHome%\kycclient.exe
-xcopy /y kycclient.exe %currentHome%
-
 set currentLib=%currentHome%\lib
 mkdir %currentLib%
 
@@ -41,10 +38,12 @@ del /q /f %currentLib%\webcam-capture-0.3.*.jar
 del /q /f %currentLib%\demographics-validation-engine-*.jar
 del /q /f %currentLib%\validation-engine-*.jar
 del /q /f %currentLib%\x86-3.3*.jar
+del /q /f %currentHome%\kycclient.exe
 
-xcopy /y lib\*.jar %currentLib%
-xcopy /y lib\*.dll %currentLib%
+xcopy /y /r lib\*.jar %currentLib%
+xcopy /y /r lib\*.dll %currentLib%
 
+xcopy /y /r kycclient.exe %currentHome%
 
 del /q /f %currentHome%\props\.kyc
 
