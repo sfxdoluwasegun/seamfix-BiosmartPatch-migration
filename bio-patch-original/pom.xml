@@ -63,7 +63,7 @@
                                 <jdkPreference>preferJre</jdkPreference>
                                 <runtimeBits>64/32</runtimeBits>
                                 <minVersion>1.7.0</minVersion>
-                                <maxVersion>1.7.0_80</maxVersion>
+                                <maxVersion>1.8.0</maxVersion>
                             </jre>
                         </configuration>
                     </execution>
