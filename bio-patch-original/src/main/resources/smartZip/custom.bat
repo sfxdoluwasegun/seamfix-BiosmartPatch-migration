@@ -65,4 +65,52 @@ if %found%==0 (
 	setx PATH "%currentNative%;%OLD_SYSTEM_PATH%;" -m
 )
 
+rem change password
+set version=9.2
+if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
+	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
+) else (
+	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
+		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
+	)
+)
+
+set version=9.3
+if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
+	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
+) else (
+	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
+		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
+	)
+)
+
+set version=9.4
+if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
+	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
+) else (
+	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
+		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
+	)
+)
+
+set version=9.5
+if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
+	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
+) else (
+	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
+		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
+	)
+)
+
+echo %peesql%
+echo off
+set "old_pass=5v2YM@LHq4"
+set "new_pass_pg=*W1np@ssbi0#"
+set PGPASSWORD=%old_pass%
+%peesql% -U postgres -c "alter user postgres password '%new_pass_pg%'"
+
+set "old_pass=s3amf1x#"
+set PGPASSWORD=%old_pass%
+%peesql% -U postgres -c "alter user postgres password '%new_pass_pg%'"
+
 exit
