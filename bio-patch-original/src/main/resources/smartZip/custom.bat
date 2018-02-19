@@ -107,10 +107,12 @@ echo off
 set "old_pass=5v2YM@LHq4"
 set "new_pass_pg=*W1np@ssbi0#"
 set PGPASSWORD=%old_pass%
+%peesql% -U postgres -d kyc_db -c "ALTER TABLE enrollment_client_audit_trail DROP CONSTRAINT enrollment_client_audit_trail_unique_activity_code_key;"
 %peesql% -U postgres -c "alter user postgres password '%new_pass_pg%'"
 
 set "old_pass=s3amf1x#"
 set PGPASSWORD=%old_pass%
+%peesql% -U postgres -d kyc_db -c "ALTER TABLE enrollment_client_audit_trail DROP CONSTRAINT enrollment_client_audit_trail_unique_activity_code_key;"
 %peesql% -U postgres -c "alter user postgres password '%new_pass_pg%'"
 
 exit
