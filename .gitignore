@@ -19,7 +19,7 @@ buildNumber.properties
 #*.jar
 /bio-patch-dummy/target
 /bio-patch-original/target
-/bio-patch-dummy/src/main/resources/launch.exe
+launch.exe
 *.war
 *.ear
 
