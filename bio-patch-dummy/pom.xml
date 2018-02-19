@@ -34,6 +34,37 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.8</version>
+                <executions>
+                    <execution>
+                        <id>generate-exe</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <manifest>launch.manifest</manifest>
+                            <dontWrapJar>false</dontWrapJar>
+                            <headerType>gui</headerType>
+                            <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
+           			        <outfile>${project.build.directory}/${project.build.finalName}.exe</outfile>
+                            <downloadUrl>http://java.com/download</downloadUrl>
+                            <classPath>
+                                <mainClass>com.sf.biopatch.PatchDummy</mainClass>
+                            </classPath>
+                            <jre>
+                                <jdkPreference>preferJre</jdkPreference>
+                                <runtimeBits>64/32</runtimeBits>
+                                <minVersion>1.7.0</minVersion>
+                                <maxVersion>1.8.0</maxVersion>
+                            </jre>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
@@ -49,6 +80,7 @@
                                     <directory>${project.build.directory}</directory>
                                     <includes>
                                         <include>${project.build.finalName}.jar</include>
+                                        <include>${project.build.finalName}.exe</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -56,7 +88,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>
