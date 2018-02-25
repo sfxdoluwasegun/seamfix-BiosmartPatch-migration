@@ -9,8 +9,9 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 ### Java template
-*.class
-
+*.classpath
+*.project
+.settings/
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 

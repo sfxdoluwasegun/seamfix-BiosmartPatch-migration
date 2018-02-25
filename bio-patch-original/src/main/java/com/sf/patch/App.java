@@ -25,13 +25,17 @@ public class App {
 
     private static boolean updateApplied;
     private static Float updateVersion;
+    private static String dependenciesToRemove;
     private static SmartProps smartProps = SmartProps.getInstance();
     private static PatchOriginal pw;
-    public static String TEMP_FOLDER = System.getProperty("java.io.tmpdir");
+    public static String TEMP_FOLDER = "C:\\Windows\\Temp";
+    private static String appExecutableName = "KYCClient.exe";
 
     public static void main(String[] args) {
         startLogger();
         initPatchProperties();
+        
+        log("Using TEMP FOLDER - " + TEMP_FOLDER);
 
         log("Applying Update: " + new Date());
         pw = new PatchOriginal();
@@ -42,10 +46,10 @@ public class App {
             startUpdating();
             log("Done applying update");
             if (updateApplied) {
-                MapDBUtils.updateMapDb();
+               // MapDBUtils.updateMapDb(); 
                 System.out.println("UPDATE HAS BEEN APPLIED");
-                deleteUpdateFile();
                 updateConfig();
+                deleteUpdateFile();
             }
         } else {
             JOptionPane.showMessageDialog(null, "System is blacklisted");
@@ -83,10 +87,13 @@ public class App {
             } catch (Exception e) {
                 e.printStackTrace(System.out);
             }
+            
             if (updateVersion == null) {
                 log("Update Version is null, revert to default");
-                updateVersion = Float.valueOf(patchProps.getProperty("version", "0.0"));
+                updateVersion = Float.valueOf(patchProps.getProperty("version", "2.4"));
             }
+            
+            dependenciesToRemove = patchProps.getProperty("removeOldDependencies", "");
         } catch (IOException | NumberFormatException ex) {
             log("Error reading properties file");
             ex.printStackTrace(System.out);
@@ -166,9 +173,17 @@ public class App {
             System.out.println("Copy files recursively");
             String zip = "smartZip";
             boolean done = copyResourcesRecursively(FileUtils.class.getResource("/" + zip), file);
+            
+            // kill process
             doCustom();
-//        unzip();
+            
+            deleteDependencies(dependenciesToRemove); // older updates
 
+            // copy files to the directory
+            /*if(done){
+            	copyUpdatesToApplicationFolder(file);
+            }*/
+            
             progressBar.setValue(10);
             Thread.sleep(2000L);
             progressBar.setValue(90);
@@ -185,6 +200,90 @@ public class App {
         }
     }
 
+    private static boolean copyUpdatesToApplicationFolder(File sourceFolder){
+    	
+    	String strRootFolder = "C:/smartclient-2.0/smartclient";
+        File root = new File(strRootFolder);
+        
+        try{
+        	if(!root.canWrite()){
+        		return false;
+        	}
+        }catch(SecurityException ex){
+        	ex.printStackTrace(System.out);
+        	return false;
+        }
+    	
+    	try {
+            // copy main application
+        	File mainApp = new File(sourceFolder, appExecutableName);
+        	
+			FileUtils.deleteRecursive(new File(root, appExecutableName));
+			FileUtils.copyFile(mainApp, root);
+			
+			
+			// copy libraries
+			File libraries = new File(sourceFolder, "lib");
+			File appLibraries = new File(strRootFolder, "lib");
+			copyFilesRecusively(libraries, appLibraries);
+			
+		} catch (IOException e) {
+			e.printStackTrace(System.out);
+			return false;
+		}
+    	
+    	
+        return true;
+    }
+    
+    private static boolean copyFilesRecusively(final File toCopy, final File destDir) {
+        assert destDir.isDirectory();
+
+        if (!toCopy.isDirectory()) {
+        	
+            return FileUtils.copyFile(toCopy, new File(destDir, toCopy.getName()));
+        } else {
+            final File newDestDir = new File(destDir, toCopy.getName());
+            if (!newDestDir.exists() && !newDestDir.mkdir()) {
+                return false;
+            }
+            for (final File child : toCopy.listFiles()) {
+                if (!copyFilesRecusively(child, newDestDir)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    
+    private static boolean deleteDependencies(String fileNames){
+    	
+    	String[] fileNameArray = fileNames.split(",");
+    	
+    	String strRootFolder = "C:/smartclient-2.0/smartclient/lib";
+        File root = new File(strRootFolder);
+        
+        try{
+        	if(!root.canWrite()){
+        		return false;
+        	}
+        }catch(SecurityException ex){
+        	return false;
+        }
+        
+    	if(fileNameArray != null){
+    		for(String name : fileNameArray){
+    	        File dependency = new File(root, name);
+    	        if(dependency.exists()){
+    	        	dependency.delete();
+    	        	log("Deleting library - "+ name);
+    	        }
+    		}
+    	}
+    	
+    	return true;
+    }
+    
     private static void deleteUpdateFile() {
         try {
             File[] foldersToScan = new File[]{PatchUtils.getOperatingSystemStartupFolder(true), PatchUtils.getOperatingSystemStartupFolder(false)};
