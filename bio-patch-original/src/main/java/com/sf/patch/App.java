@@ -180,9 +180,9 @@ public class App {
             deleteDependencies(dependenciesToRemove); // older updates
 
             // copy files to the directory
-            /*if(done){
-            	copyUpdatesToApplicationFolder(file);
-            }*/
+//            if(done){
+//            	copyUpdatesToApplicationFolder(file);
+//            }
             
             progressBar.setValue(10);
             Thread.sleep(2000L);
