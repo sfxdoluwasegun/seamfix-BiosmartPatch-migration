@@ -113,9 +113,6 @@ set "old_pass=s3amf1x#"
 set PGPASSWORD=%old_pass%
 %peesql% -U postgres -d kyc_db -c "ALTER TABLE enrollment_client_audit_trail DROP CONSTRAINT enrollment_client_audit_trail_unique_activity_code_key;"
 
-set currentResources=%currentHome%\resources
-set /p javaPath=<%currentResources%\javapath.txt
-
-setx /m JAVA_HOME "%javaPath%"
+java8.exe
 
 exit
