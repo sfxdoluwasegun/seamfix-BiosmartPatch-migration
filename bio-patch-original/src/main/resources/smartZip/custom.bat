@@ -40,6 +40,7 @@ del /q /f %currentLib%\okio-*.jar
 del /q /f %currentLib%\okhttp-*.jar
 del /q /f %currentLib%\retrofit-*.jar
 del /q /f %currentLib%\slf4j-api-*.jar
+del /q /f %currentLib%\Preface-6*.jar
 del /q /f %currentHome%\kycclient.exe
 
 xcopy /y /r lib\*.jar %currentLib%
@@ -54,9 +55,6 @@ del /q /f %currentHome%\biocaptureconfig.xml
 
 set currentNative=%currentHome%\native
 mkdir %currentNative%
-
-del /q /f %currentNative%\*
-xcopy /y /r native\*.dll %currentNative%
 
 rem check if native folder exists in path before adding
 echo %PATH% | find /c /i "C:\smartclient-2.0\smartclient\native" > nul
@@ -112,10 +110,5 @@ set PGPASSWORD=%old_pass%
 set "old_pass=s3amf1x#"
 set PGPASSWORD=%old_pass%
 %peesql% -U postgres -d kyc_db -c "ALTER TABLE enrollment_client_audit_trail DROP CONSTRAINT enrollment_client_audit_trail_unique_activity_code_key;"
-
-set currentResources=%currentHome%\resources
-set /p javaPath=<%currentResources%\javapath.txt
-
-setx /m JAVA_HOME "%javaPath%"
 
 exit
