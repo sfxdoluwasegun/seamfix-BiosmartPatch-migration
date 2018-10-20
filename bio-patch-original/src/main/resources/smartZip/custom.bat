@@ -40,6 +40,7 @@ del /q /f %currentLib%\okio-*.jar
 del /q /f %currentLib%\okhttp-*.jar
 del /q /f %currentLib%\retrofit-*.jar
 del /q /f %currentLib%\slf4j-api-*.jar
+del /q /f %currentLib%\Preface-6*.jar
 del /q /f %currentHome%\kycclient.exe
 
 xcopy /y /r lib\*.jar %currentLib%
