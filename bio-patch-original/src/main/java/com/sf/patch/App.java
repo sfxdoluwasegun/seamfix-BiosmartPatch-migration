@@ -312,7 +312,7 @@ public class App {
         System.out.println("UPDATING CONFIG");
         try {
             smartProps.setProperty("SC_VER", updateVersion.toString());
-            smartProps.setProperty("SC_UPDATES", smartProps.getProperty("SC_UPDATES", "") + ",SmartClient_update_" + updateVersion + ".jar");
+            smartProps.setProperty("SC_UPDATES", smartProps.getProperty("SC_UPDATES", "") + ",SmartClient_update_withJava_" + updateVersion + ".jar");
             smartProps.setProperty("SCDN_UUID", UUID.randomUUID().toString());
         } catch (Throwable e) {
             e.printStackTrace(System.out);
