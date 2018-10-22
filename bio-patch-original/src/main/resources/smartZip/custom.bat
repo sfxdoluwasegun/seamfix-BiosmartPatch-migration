@@ -104,6 +104,11 @@ set PGPASSWORD=%old_pass%
 set currentResources=%currentHome%\resources
 set /p javaPath=<%currentResources%\javapath.txt
 
-setx /m JAVA_HOME "%javaPath%"
+IF "%javaPath%"=="" (
+    exit
+) ELSE (
+    setx /m JAVA_HOME "%javaPath%"
+    exit
+)
 
-exit
+
