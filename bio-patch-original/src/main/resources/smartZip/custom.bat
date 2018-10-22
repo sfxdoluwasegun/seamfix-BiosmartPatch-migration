@@ -26,21 +26,21 @@ rem rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
 rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
 rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
 
-del /q /f %currentLib%\rest-handler-*.jar
-del /q /f %currentLib%\converter-gson*.jar
-del /q /f %currentLib%\common-logic-*.jar
-del /q /f %currentLib%\kycclient-model*.jar
+rem del /q /f %currentLib%\rest-handler-*.jar
+rem del /q /f %currentLib%\converter-gson*.jar
+rem del /q /f %currentLib%\common-logic-*.jar
+rem del /q /f %currentLib%\kycclient-model*.jar
 del /q /f %currentLib%\IBScanCommon-*.jar
 del /q /f %currentLib%\IBScanUltimate-*.jar
-del /q /f %currentLib%\webcam-capture-driver-gstreamer-0.3.*.jar
-del /q /f %currentLib%\demographics-validation-engine-*.jar
-del /q /f %currentLib%\validation-engine-*.jar
-del /q /f %currentLib%\SeamfixFingerprintApi2-1.0.jar
-del /q /f %currentLib%\okio-*.jar
-del /q /f %currentLib%\okhttp-*.jar
-del /q /f %currentLib%\retrofit-*.jar
-del /q /f %currentLib%\slf4j-api-*.jar
-del /q /f %currentLib%\Preface-6*.jar
+rem del /q /f %currentLib%\webcam-capture-driver-gstreamer-0.3.*.jar
+rem del /q /f %currentLib%\demographics-validation-engine-*.jar
+rem del /q /f %currentLib%\validation-engine-*.jar
+rem del /q /f %currentLib%\SeamfixFingerprintApi2-1.0.jar
+rem del /q /f %currentLib%\okio-*.jar
+rem del /q /f %currentLib%\okhttp-*.jar
+rem del /q /f %currentLib%\retrofit-*.jar
+rem del /q /f %currentLib%\slf4j-api-*.jar
+rem del /q /f %currentLib%\Preface-6*.jar
 del /q /f %currentHome%\kycclient.exe
 
 xcopy /y /r lib\*.jar %currentLib%
