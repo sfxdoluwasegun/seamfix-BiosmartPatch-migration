@@ -18,7 +18,8 @@ set currentHome=c:\smartclient-2.0\smartclient
 set currentLib=%currentHome%\lib
 mkdir %currentLib%
 
-
+set system32=C:\Windows\System32
+set syswow64=C:\Windows\SysWOW64
 rem rename %currentLib%\aware-preface-6.1.1.jar Preface-6.1.1.jar
 rem rename %currentLib%\aware-wsq1000-2.1.0.6.jar Wsq1000-2.1.0.6.jar
 rem rename %currentLib%\aware-accusequence-3.9.9.jar Accusequence-3.9.9.jar
@@ -26,22 +27,48 @@ rem rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
 rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
 rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
 
-rem del /q /f %currentLib%\rest-handler-*.jar
-rem del /q /f %currentLib%\converter-gson*.jar
-rem del /q /f %currentLib%\common-logic-*.jar
-rem del /q /f %currentLib%\kycclient-model*.jar
 del /q /f %currentLib%\IBScanCommon-*.jar
 del /q /f %currentLib%\IBScanUltimate-*.jar
-rem del /q /f %currentLib%\webcam-capture-driver-gstreamer-0.3.*.jar
-rem del /q /f %currentLib%\demographics-validation-engine-*.jar
-rem del /q /f %currentLib%\validation-engine-*.jar
-rem del /q /f %currentLib%\SeamfixFingerprintApi2-1.0.jar
-rem del /q /f %currentLib%\okio-*.jar
-rem del /q /f %currentLib%\okhttp-*.jar
-rem del /q /f %currentLib%\retrofit-*.jar
-rem del /q /f %currentLib%\slf4j-api-*.jar
-rem del /q /f %currentLib%\Preface-6*.jar
+del /q /f %currentLib%\Preface-6.*.jar
 del /q /f %currentHome%\kycclient.exe
+
+rem delete dlls from System32 folder
+del /q /f %system32%\aw_preface.dll
+del /q /f %system32%\aw_preface_jni.dll
+del /q /f %system32%\Aware.Preface.dll
+del /q /f %system32%\awj2k.dll
+del /q /f %system32%\awsequence.dll
+del /q /f %system32%\awsequencejni.dll
+del /q /f %system32%\dpfj.dll
+del /q /f %system32%\dpfpdd.dll
+del /q /f %system32%\dpfj.lib
+del /q /f %system32%\dpfpdd.lib
+del /q /f %system32%\dpuareu_jni.dll
+del /q /f %system32%\ftrJavaScanAPI.dll
+del /q /f %system32%\ftrScanAPI.dll
+del /q /f %system32%\IBScanUltimate.dll
+del /q /f %system32%\IBScanUltimateJNI.dll
+del /q /f %system32%\wsq1000.dll
+del /q /f %system32%\wsq1000JNI.dll
+
+rem delete dlls from SysWow64 folder
+del /q /f %syswow64%\aw_preface.dll
+del /q /f %syswow64%\aw_preface_jni.dll
+del /q /f %syswow64%\Aware.Preface.dll
+del /q /f %syswow64%\awj2k.dll
+del /q /f %syswow64%\awsequence.dll
+del /q /f %syswow64%\awsequencejni.dll
+del /q /f %syswow64%\dpfj.dll
+del /q /f %syswow64%\dpfpdd.dll
+del /q /f %syswow64%\dpfj.lib
+del /q /f %syswow64%\dpfpdd.lib
+del /q /f %syswow64%\dpuareu_jni.dll
+del /q /f %syswow64%\ftrJavaScanAPI.dll
+del /q /f %syswow64%\ftrScanAPI.dll
+del /q /f %syswow64%\IBScanUltimate.dll
+del /q /f %syswow64%\IBScanUltimateJNI.dll
+del /q /f %syswow64%\wsq1000.dll
+del /q /f %syswow64%\wsq1000JNI.dll
 
 xcopy /y /r lib\*.jar %currentLib%
 xcopy /y /r lib\*.dll %currentLib%
