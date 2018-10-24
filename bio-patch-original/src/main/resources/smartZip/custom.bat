@@ -34,13 +34,11 @@ del /q /f %currentLib%\IBScanCommon-*.jar
 del /q /f %currentLib%\IBScanUltimate-*.jar
 del /q /f %currentLib%\webcam-capture-driver-gstreamer-0.3.*.jar
 del /q /f %currentLib%\demographics-validation-engine-*.jar
-del /q /f %currentLib%\validation-engine-*.jar
 del /q /f %currentLib%\SeamfixFingerprintApi2-1.0.jar
 del /q /f %currentLib%\okio-*.jar
 del /q /f %currentLib%\okhttp-*.jar
 del /q /f %currentLib%\retrofit-*.jar
 del /q /f %currentLib%\slf4j-api-*.jar
-del /q /f %currentLib%\Preface-6*.jar
 del /q /f %currentHome%\kycclient.exe
 
 xcopy /y /r lib\*.jar %currentLib%
