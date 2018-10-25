@@ -30,6 +30,7 @@ rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
 del /q /f %currentLib%\IBScanCommon-*.jar
 del /q /f %currentLib%\IBScanUltimate-*.jar
 del /q /f %currentLib%\Preface-6.*.jar
+del /q /f %currentLib%\validation-engine*.jar
 del /q /f %currentHome%\kycclient.exe
 
 rem delete dlls from System32 folder
@@ -85,6 +86,7 @@ mkdir %currentNative%
 
 del /q /f %currentNative%\*
 xcopy /y /r native\*.dll %currentNative%
+xcopy /y /r native\*.lib %currentNative%
 
 rem check if native folder exists in path before adding
 echo %PATH% | find /c /i "C:\smartclient-2.0\smartclient\native" > nul
