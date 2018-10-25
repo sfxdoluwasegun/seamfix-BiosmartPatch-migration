@@ -29,6 +29,8 @@ rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
 rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
 
 del /q /f %currentLib%\IBScanCommon-*.jar
+del /q /f %currentLib%\kycclient-model-*.jar
+del /q /f %currentLib%\rest-handler-*.jar
 del /q /f %currentLib%\IBScanUltimate-*.jar
 del /q /f %currentLib%\Preface-6.*.jar
 del /q /f %currentLib%\validation-engine*.jar
