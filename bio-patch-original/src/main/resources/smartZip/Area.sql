@@ -4134,4 +4134,4 @@ Insert into area (id,name,lga_fk) values (1933,'ANCHAU',361);
 Insert into area (id,name,lga_fk) values (1934,'KUBAU',361);
 
 
-  ALTER TABLE area ADD PRIMARY KEY (id);
+ALTER TABLE area ADD PRIMARY KEY (id);
