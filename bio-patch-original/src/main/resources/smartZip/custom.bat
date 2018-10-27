@@ -34,6 +34,7 @@ del /q /f %currentLib%\rest-handler-*.jar
 del /q /f %currentLib%\IBScanUltimate-*.jar
 del /q /f %currentLib%\Preface-6.*.jar
 del /q /f %currentLib%\validation-engine*.jar
+del /q /f %currentLib%\common-logic-*.jar
 del /q /f %currentHome%\kycclient.exe
 
 rem delete dlls from System32 folder
