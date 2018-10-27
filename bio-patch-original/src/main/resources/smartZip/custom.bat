@@ -101,11 +101,10 @@ if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
 
 echo %peesql%
 echo off
-set "old_pass=5v2YM@LHq4"
-set PGPASSWORD=%old_pass%
-%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER TABLE enrollment_client_audit_trail DROP CONSTRAINT enrollment_client_audit_trail_unique_activity_code_key;"
-%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER seamfix with password 'SM@RTDBp@ZPh@z4';"
-%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER postgres with password 'Ph@z45V2YM$LHq4';"
+set PGPASSWORD=5v2YM@LHq4
+%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f pword.sql
+rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER seamfix with password 'SM@RTDBp@ZPh@z4';"
+rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER postgres with password 'Ph@z45V2YM$LHq4';"
 
 
 exit
