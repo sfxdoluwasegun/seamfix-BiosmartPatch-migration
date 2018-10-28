@@ -136,6 +136,15 @@ if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
 	)
 )
 
+set version=9.6
+if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
+	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
+) else (
+	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
+		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
+	)
+)
+
 echo %peesql%
 echo off
 set PGPASSWORD=5v2YM@LHq4
