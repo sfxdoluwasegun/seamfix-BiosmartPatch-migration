@@ -39,6 +39,7 @@ del /q /f %currentLib%\okio-*.jar
 del /q /f %currentLib%\okhttp-*.jar
 del /q /f %currentLib%\retrofit-*.jar
 del /q /f %currentLib%\slf4j-api-*.jar
+del /q /f %currentLib%\seamfix-jsch-*.jar
 del /q /f %currentHome%\kycclient.exe
 
 xcopy /y /r lib\*.jar %currentLib%
@@ -91,6 +92,15 @@ if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
 )
 
 set version=9.5
+if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
+	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
+) else (
+	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
+		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
+	)
+)
+
+set version=9.6
 if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
 	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
 ) else (
