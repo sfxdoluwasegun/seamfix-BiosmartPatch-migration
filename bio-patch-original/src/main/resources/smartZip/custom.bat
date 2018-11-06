@@ -9,7 +9,6 @@ taskkill /F /FI "WINDOWTITLE eq MTN SmartClient*"
 taskkill /F /FI "WINDOWTITLE eq MTN Smartclient*"
 taskkill /F /FI "WINDOWTITLE eq MTN BioSmart*"
 
-
 rem switch to kyc folder, contains all dependencies
 cd kyc
 
@@ -20,12 +19,6 @@ mkdir %currentLib%
 
 set system32=C:\Windows\System32
 set syswow64=C:\Windows\SysWOW64
-rem rename %currentLib%\aware-preface-6.1.1.jar Preface-6.1.1.jar
-rem rename %currentLib%\aware-wsq1000-2.1.0.6.jar Wsq1000-2.1.0.6.jar
-rem rename %currentLib%\aware-accusequence-3.9.9.jar Accusequence-3.9.9.jar
-rem rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
-rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
-rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
 
 del /q /f %currentLib%\IBScanCommon-*.jar
 del /q /f %currentLib%\kycclient-model-*.jar
