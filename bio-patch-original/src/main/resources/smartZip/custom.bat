@@ -15,27 +15,9 @@ cd kyc
 
 set currentHome=c:\smartclient-2.0\smartclient
 
-set currentLib=%currentHome%\lib
-mkdir %currentLib%
-
 set system32=C:\Windows\System32
 set syswow64=C:\Windows\SysWOW64
 
-rem rename %currentLib%\aware-preface-6.1.1.jar Preface-6.1.1.jar
-rem rename %currentLib%\aware-wsq1000-2.1.0.6.jar Wsq1000-2.1.0.6.jar
-rem rename %currentLib%\aware-accusequence-3.9.9.jar Accusequence-3.9.9.jar
-rem rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
-rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
-rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
-
-del /q /f %currentLib%\IBScanCommon-*.jar
-del /q /f %currentLib%\kycclient-model-*.jar
-del /q /f %currentLib%\rest-handler-*.jar
-del /q /f %currentLib%\IBScanUltimate-*.jar
-del /q /f %currentLib%\Preface-6.*.jar
-del /q /f %currentLib%\validation-engine*.jar
-del /q /f %currentLib%\common-logic-*.jar
-del /q /f %currentHome%\kycclient.exe
 
 rem delete dlls from System32 folder
 del /q /f %system32%\aw_preface.dll
@@ -75,94 +57,5 @@ del /q /f %syswow64%\IBScanUltimateJNI.dll
 del /q /f %syswow64%\wsq1000.dll
 del /q /f %syswow64%\wsq1000JNI.dll
 
-xcopy /y /r lib\*.jar %currentLib%
-xcopy /y /r lib\*.dll %currentLib%
-
-xcopy /y /r KYCClient.exe %currentHome%
-
-del /q /f %currentHome%\props\.kyc
-
-rem delete biocapture xml
-del /q /f %currentHome%\biocaptureconfig.xml
-
-set currentNative=%currentHome%\native
-mkdir %currentNative%
-
-del /q /f %currentNative%\*
-xcopy /y /r native\*.dll %currentNative%
-xcopy /y /r native\*.lib %currentNative%
-
-rem check if native folder exists in path before adding
-echo %PATH% | find /c /i "C:\smartclient-2.0\smartclient\native" > nul
-if not errorlevel 1 goto jump
-set pathkey="HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment"
-for /F "usebackq skip=2 tokens=2*" %%A IN (`reg query %pathkey% /v Path`) do (reg add %pathkey% /f /v Path /t REG_SZ /d "%%B;C:\smartclient-2.0\smartclient\native")
-powershell -command "& {$md=\"[DllImport(`\"user32.dll\"\",SetLastError=true,CharSet=CharSet.Auto)]public static extern IntPtr SendMessageTimeout(IntPtr hWnd,uint Msg,UIntPtr wParam,string lParam,uint fuFlags,uint uTimeout,out UIntPtr lpdwResult);\"; $sm=Add-Type -MemberDefinition $md -Name NativeMethods -Namespace Win32 -PassThru;$result=[uintptr]::zero;$sm::SendMessageTimeout(0xffff,0x001A,[uintptr]::Zero,\"Environment\",2,5000,[ref]$result)}"
-:jump
-
-rem change password
-set version=9.2
-if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
-	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
-) else (
-	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
-		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
-	)
-)
-
-set version=9.3
-if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
-	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
-) else (
-	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
-		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
-	)
-)
-
-set version=9.4
-if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
-	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
-) else (
-	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
-		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
-	)
-)
-
-set version=9.5
-if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
-	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
-) else (
-	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
-		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
-	)
-)
-
-set version=9.6
-if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
-	set peesql="%programfiles%\postgresql\%version%\bin\psql.exe"
-) else (
-	if exist "%programfiles(x86)%\postgresql\%version%\bin\psql.exe" (
-		set peesql="%programfiles(x86)%\postgresql\%version%\bin\psql.exe"
-	)
-)
-
-echo %peesql%
-echo off
-set PGPASSWORD=5v2YM@LHq4
-%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f pword.sql
-rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER seamfix with password 'SM@RTDBp@ZPh@z4';"
-rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER postgres with password 'Ph@z45V2YM$LHq4';"
-
-set currentResources=%currentHome%\resources
-set /p javaPath=<%currentResources%\javapath.txt
-
-IBScanDriverInstall.exe
-
-IF "%javaPath%"=="" (
-    exit
-) ELSE (
-    setx /m JAVA_HOME "%javaPath%"
-    exit
-)
 
 
