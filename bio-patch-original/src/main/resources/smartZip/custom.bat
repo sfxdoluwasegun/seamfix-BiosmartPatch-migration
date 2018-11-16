@@ -28,14 +28,14 @@ rem rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
 rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
 rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
 
-del /q /f %currentLib%\IBScanCommon-*.jar
-del /q /f %currentLib%\kycclient-model-*.jar
-del /q /f %currentLib%\rest-handler-*.jar
-del /q /f %currentLib%\IBScanUltimate-*.jar
-del /q /f %currentLib%\Preface-6.*.jar
-del /q /f %currentLib%\validation-engine*.jar
-del /q /f %currentLib%\common-logic-*.jar
-del /q /f %currentHome%\kycclient.exe
+rem del /q /f %currentLib%\IBScanCommon-*.jar
+rem del /q /f %currentLib%\kycclient-model-*.jar
+rem del /q /f %currentLib%\rest-handler-*.jar
+rem del /q /f %currentLib%\IBScanUltimate-*.jar
+rem del /q /f %currentLib%\Preface-6.*.jar
+rem del /q /f %currentLib%\validation-engine*.jar
+rem del /q /f %currentLib%\common-logic-*.jar
+rem del /q /f %currentHome%\kycclient.exe
 
 rem delete dlls from System32 folder
 del /q /f %system32%\aw_preface.dll
@@ -88,9 +88,9 @@ del /q /f %currentHome%\biocaptureconfig.xml
 set currentNative=%currentHome%\native
 mkdir %currentNative%
 
-del /q /f %currentNative%\*
+del /q /f %currentNative%\ftrScanAPI.dll
 xcopy /y /r native\*.dll %currentNative%
-xcopy /y /r native\*.lib %currentNative%
+rem xcopy /y /r native\*.lib %currentNative%
 
 rem check if native folder exists in path before adding
 echo %PATH% | find /c /i "C:\smartclient-2.0\smartclient\native" > nul
@@ -146,23 +146,16 @@ if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
 	)
 )
 
-echo %peesql%
-echo off
-set PGPASSWORD=5v2YM@LHq4
-%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f pword.sql
+rem echo %peesql%
+rem echo off
+rem set PGPASSWORD=5v2YM@LHq4
+rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f pword.sql
 rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER seamfix with password 'SM@RTDBp@ZPh@z4';"
 rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER postgres with password 'Ph@z45V2YM$LHq4';"
 
-set currentResources=%currentHome%\resources
-set /p javaPath=<%currentResources%\javapath.txt
+rem set currentResources=%currentHome%\resources
+rem set /p javaPath=<%currentResources%\javapath.txt
 
-IBScanDriverInstall.exe
-
-IF "%javaPath%"=="" (
-    exit
-) ELSE (
-    setx /m JAVA_HOME "%javaPath%"
-    exit
-)
+exit
 
 
