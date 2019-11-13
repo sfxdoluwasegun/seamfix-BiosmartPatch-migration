@@ -17,7 +17,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <patch.original.exe.name>../bio-patch-dummy/src/main/resources/launch.exe</patch.original.exe.name>
-        <version>3.1</version>
+        <version>3.3</version>
     </properties>
     <build>
         <plugins>

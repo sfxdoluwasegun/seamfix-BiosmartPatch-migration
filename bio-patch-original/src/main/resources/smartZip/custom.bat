@@ -21,21 +21,19 @@ mkdir %currentLib%
 set system32=C:\Windows\System32
 set syswow64=C:\Windows\SysWOW64
 
-rem rename %currentLib%\aware-preface-6.1.1.jar Preface-6.1.1.jar
-rem rename %currentLib%\aware-wsq1000-2.1.0.6.jar Wsq1000-2.1.0.6.jar
-rem rename %currentLib%\aware-accusequence-3.9.9.jar Accusequence-3.9.9.jar
-rem rename %currentLib%\aware-ls-3.13.65.jar Ls-3.13.65.jar
-rem rename %currentLib%\aware-nistpack-5.16.jar Nistpack-5.16.jar
-rem rename %currentLib%\lombok.jar lombok-1.16.6.jar
-
-rem del /q /f %currentLib%\IBScanCommon-*.jar
-rem del /q /f %currentLib%\kycclient-model-*.jar
-rem del /q /f %currentLib%\rest-handler-*.jar
-rem del /q /f %currentLib%\IBScanUltimate-*.jar
+del /q /f %currentLib%\IBScanCommon-*.jar
+del /q /f %currentLib%\kycclient-model-*.jar
+del /q /f %currentLib%\rest-handler-*.jar
+del /q /f %currentLib%\IBScanUltimate-*.jar
 rem del /q /f %currentLib%\Preface-6.*.jar
-rem del /q /f %currentLib%\validation-engine*.jar
-rem del /q /f %currentLib%\common-logic-*.jar
-rem del /q /f %currentHome%\kycclient.exe
+del /q /f %currentLib%\validation-engine*.jar
+del /q /f %currentLib%\common-logic-*.jar
+del /q /f %currentLib%\webcam-capture-driver-gstreamer-*.jar
+del /q /f %currentLib%\finger-442capture-*.jar
+del /q /f %currentLib%\webcam-capture-*.jar
+del /q /f %currentLib%\titanic-sdk-win-*.jar
+del /q /f %currentLib%\finger-capture-*.jar
+del /q /f %currentHome%\kycclient.exe
 
 rem delete dlls from System32 folder
 del /q /f %system32%\aw_preface.dll
@@ -76,7 +74,7 @@ del /q /f %syswow64%\wsq1000.dll
 del /q /f %syswow64%\wsq1000JNI.dll
 
 xcopy /y /r lib\*.jar %currentLib%
-xcopy /y /r lib\*.dll %currentLib%
+rem xcopy /y /r lib\*.dll %currentLib%
 
 xcopy /y /r KYCClient.exe %currentHome%
 
@@ -88,7 +86,8 @@ del /q /f %currentHome%\biocaptureconfig.xml
 set currentNative=%currentHome%\native
 mkdir %currentNative%
 
-del /q /f %currentNative%\ftrScanAPI.dll
+del /q /f %currentNative%\ftr*.dll
+del /q /f %currentNative%\IBScan*.dll
 xcopy /y /r native\*.dll %currentNative%
 rem xcopy /y /r native\*.lib %currentNative%
 
