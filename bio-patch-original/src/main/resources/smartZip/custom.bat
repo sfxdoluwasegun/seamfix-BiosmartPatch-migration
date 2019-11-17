@@ -21,10 +21,10 @@ mkdir %currentLib%
 set system32=C:\Windows\System32
 set syswow64=C:\Windows\SysWOW64
 
-del /q /f %currentLib%\IBScanCommon-*.jar
+del /q /f %currentLib%\IBScanCommonX64-*.jar
 del /q /f %currentLib%\kycclient-model-*.jar
 del /q /f %currentLib%\rest-handler-*.jar
-del /q /f %currentLib%\IBScanUltimate-*.jar
+del /q /f %currentLib%\IBScanUltimateX64-*.jar
 rem del /q /f %currentLib%\Preface-6.*.jar
 del /q /f %currentLib%\validation-engine*.jar
 del /q /f %currentLib%\common-logic-*.jar
@@ -32,6 +32,7 @@ del /q /f %currentLib%\webcam-capture-driver-gstreamer-*.jar
 del /q /f %currentLib%\finger-442capture-*.jar
 del /q /f %currentLib%\webcam-capture-*.jar
 del /q /f %currentLib%\titanic-sdk-win-*.jar
+del /q /f %currentLib%\demographics-validation-engine-*.jar
 del /q /f %currentLib%\finger-capture-*.jar
 del /q /f %currentHome%\kycclient.exe
 
@@ -74,7 +75,7 @@ del /q /f %syswow64%\wsq1000.dll
 del /q /f %syswow64%\wsq1000JNI.dll
 
 xcopy /y /r lib\*.jar %currentLib%
-rem xcopy /y /r lib\*.dll %currentLib%
+rem xcopy /y /r lib\*.dll %currentLib% -----done below after deleting old dlls
 
 xcopy /y /r KYCClient.exe %currentHome%
 
