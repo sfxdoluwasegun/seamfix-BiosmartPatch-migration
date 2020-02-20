@@ -148,10 +148,10 @@ if exist "%programfiles%\postgresql\%version%\bin\psql.exe" (
 
 rem echo %peesql%
 rem echo off
-rem set PGPASSWORD=5v2YM@LHq4
-rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f pword.sql
-rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER seamfix with password 'SM@RTDBp@ZPh@z4';"
-rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER postgres with password 'Ph@z45V2YM$LHq4';"
+set PGPASSWORD=Ph@z45V2YM$LHq4
+%peesql% -h localhost -p 5432 -U postgres -d kyc_db -f pword.sql
+rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER seamfix with password 'Sm@RTDbP@SPh@Z5';"
+rem %peesql% -h localhost -p 5432 -U postgres -d kyc_db -f  "ALTER USER postgres with password 'Ph@z55V2yMXLhQ5';"
 
 rem set currentResources=%currentHome%\resources
 rem set /p javaPath=<%currentResources%\javapath.txt
