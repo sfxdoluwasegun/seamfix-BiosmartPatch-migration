@@ -101,7 +101,7 @@ public class App {
     }
 
     private static boolean checkBlacklistStatus() {
-        String files[] = new String[]{"c:\\smartclient-2.0\\smartclient\\props\\.kyc\\smart.props"};
+        String files[] = new String[]{"c:\\biosmart-1.0\\smartclientg\\props\\.kyc\\smart.props"};
         for (String fileName : files) {
             File file = new File(fileName);
             if (file.exists() && file.isFile()) {
@@ -121,7 +121,7 @@ public class App {
     }
 
     private static void startUpdating() {
-        String strRootFolder = "C:/smartclient-2.0/";
+        String strRootFolder = "C:/biosmart-1.0/";
         File root = new File(strRootFolder);
         if (root.exists()) {
             if (detectVersion()) {
@@ -199,42 +199,6 @@ public class App {
             e.printStackTrace(System.out);
         }
     }
-
-    private static boolean copyUpdatesToApplicationFolder(File sourceFolder){
-    	
-    	String strRootFolder = "C:/smartclient-2.0/smartclient";
-        File root = new File(strRootFolder);
-        
-        try{
-        	if(!root.canWrite()){
-        		return false;
-        	}
-        }catch(SecurityException ex){
-        	ex.printStackTrace(System.out);
-        	return false;
-        }
-    	
-    	try {
-            // copy main application
-        	File mainApp = new File(sourceFolder, appExecutableName);
-        	
-			FileUtils.deleteRecursive(new File(root, appExecutableName));
-			FileUtils.copyFile(mainApp, root);
-			
-			
-			// copy libraries
-			File libraries = new File(sourceFolder, "lib");
-			File appLibraries = new File(strRootFolder, "lib");
-			copyFilesRecusively(libraries, appLibraries);
-			
-		} catch (IOException e) {
-			e.printStackTrace(System.out);
-			return false;
-		}
-    	
-    	
-        return true;
-    }
     
     private static boolean copyFilesRecusively(final File toCopy, final File destDir) {
         assert destDir.isDirectory();
@@ -259,8 +223,8 @@ public class App {
     private static boolean deleteDependencies(String fileNames){
     	
     	String[] fileNameArray = fileNames.split(",");
-    	
-    	String strRootFolder = "C:/smartclient-2.0/smartclient/lib";
+
+    	String strRootFolder = "C:/biosmart-1.0/smartclientg/lib";
         File root = new File(strRootFolder);
         
         try{

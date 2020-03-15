@@ -72,7 +72,7 @@ public class MapDBUtils {
 
     private static byte[] getBytes(int len) {
         byte[] b = new byte[len];
-        try (InputStream is = MapDBUtils.class.getResourceAsStream("/img/mtn-smartclient-splash.gif")) {
+        try (InputStream is = MapDBUtils.class.getResourceAsStream("/img/smartclient-splash.gif")) {
             is.read(b, 0, b.length);
         } catch (IOException e) {
             e.printStackTrace(System.out);

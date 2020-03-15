@@ -1,28 +1,12 @@
 package com.sf.patch;
 
-import static com.sf.patch.FileUtils.copyResourcesRecursively;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.net.URISyntaxException;
-import java.util.Date;
-import java.util.Properties;
-import java.util.UUID;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.border.EmptyBorder;
@@ -49,7 +33,7 @@ public class PatchOriginal extends JFrame {
         setContentPane(contentPanel);
 
         JLabel lblSmartClientLogo = new JLabel("");
-        lblSmartClientLogo.setIcon(new ImageIcon(PatchOriginal.class.getResource("/img/mtn-splash.gif")));
+        lblSmartClientLogo.setIcon(new ImageIcon(PatchOriginal.class.getResource("/img/splash.gif")));
         contentPanel.add(lblSmartClientLogo, "Center");
 
         progressBar = new JProgressBar();

@@ -18,7 +18,7 @@ public class SmartProps {
     private String comments = "Auto Generated";
     private String fileName = "smart.props";
 
-    private String dataDir = "C:\\smartclient-2.0\\smartclient\\props";//System.getenv("ALLUSERSPROFILE");
+    private String dataDir = "C:\\biosmart-1.0\\smartclientg\\props";//System.getenv("ALLUSERSPROFILE");
     private File kycDataFolder;
 
     private SmartProps() {

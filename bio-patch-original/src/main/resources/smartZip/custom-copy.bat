@@ -13,7 +13,7 @@ taskkill /F /FI "WINDOWTITLE eq MTN BioSmart*"
 rem switch to kyc folder, contains all dependencies
 cd kyc
 
-set currentHome=c:\smartclient-2.0\smartclient
+set currentHome=C:\biosmart-1.0\smartclientg
 
 del /q /f %currentHome%\kycclient.exe
 xcopy /y kycclient.exe %currentHome%
@@ -96,7 +96,7 @@ set currentNative=%currentHome%\native
 mkdir %currentNative%
 
 rem check if native folder exists in path before adding
-for /F "tokens=*" %%f in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path ^| find /c /i "c:\smartclient-2.0\smartclient\native"') do (set found=%%f)
+for /F "tokens=*" %%f in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path ^| find /c /i "C:\biosmart-1.0\smartclientg\native"') do (set found=%%f)
 
 for /F "tokens=2* delims= " %%f IN ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v path ^| findstr /i path') do (set OLD_SYSTEM_PATH=%%g)
 
